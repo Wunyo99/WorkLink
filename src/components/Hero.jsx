@@ -1,0 +1,50 @@
+import { Search, Upload } from "lucide-react";
+import { Link } from "react-router-dom";
+const Hero = () => {
+  return (
+    <section
+      id="home"
+      className="relative h-screen flex items-center justify-center md:justify-start overflow-hidden"
+    >
+      {/* BACKGROUND IMAGE (FULL WIDTH) */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage:
+            "url('https://t3.ftcdn.net/jpg/04/14/45/68/240_F_414456803_rsVip8ZydnrsbGVdawBvlsKynv90KYS2.jpg')",
+        }}
+      />
+
+      {/* SMOOTH PURPLE BLEND OVERLAY */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(88, 28, 135, 0.95) 0%, rgba(88, 28, 135, 0.7) 35%, rgba(88, 28, 135, 0.2) 60%, rgba(88, 28, 135, 0) 100%)",
+        }}
+      />
+      <div className="relative max-w-2xl px-6 md:px-15 text-center md:text-start space-y-10 z-10">
+        <h1 className="text-4xl md:text-6xl text-white font-bold">
+          <span>Find your job</span> without any hassle
+        </h1>
+
+        <p className="text-white/90 font-medium text-xl">
+          Discover thousands of job opportunities from top companies. Apply in
+          minutes and take the next step in your career
+        </p>
+
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-5">
+          <Link
+            to="/jobs"
+            className="flex items-center gap-2 text-purple-800 bg-white py-4 px-10 rounded-2xl font-medium hover:text-white hover:bg-purple-500 duration-300"
+          >
+            <Search />
+            <span>Find Jobs</span>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
