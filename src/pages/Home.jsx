@@ -228,7 +228,7 @@ const Home = () => {
                   type="email"
                   required
                 />
-                <button className="bg-gray-800 font-medium text-white rounded-e-full py-2 px-4 cursor-pointer">
+                <button className="bg-gray-800 font-medium text-white rounded-e-full py-2 px-3 cursor-pointer">
                   Subscribe
                 </button>
               </div>

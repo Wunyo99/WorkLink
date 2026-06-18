@@ -1,29 +1,43 @@
 import { NavLink, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
     { name: "Find Jobs", path: "/jobs" },
     { name: "Contact", path: "/contact" },
   ];
 
+    useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const linkClass = ({ isActive }) =>
     isActive
-      ? "text-white font-bold"
-      : "text-black font-medium hover:text-white transition duration-300";
+      ? " font-bold text-yellow-200 text-lg"
+      : "text-white font-medium hover:text-yellow-200 transition duration-300";
+
+
+  const headerBg =
+    "linear-gradient(to right, rgba(88, 28, 135, 0.95) 0%, rgba(88, 28, 135, 0.7) 35%, rgba(88, 28, 135, 0.2) 60%, rgba(88, 28, 135, 0) 100%)";
+
   return (
     <>
       <header
         style={{
-          background:
-            "linear-gradient(to right, rgba(88, 28, 135, 0.95) 0%, rgba(88, 28, 135, 0.7) 35%, rgba(88, 28, 135, 0.2) 60%, rgba(88, 28, 135, 0) 100%)",
+          background: `${isScrolled ? headerBg : ""}`,
         }}
-        className="bg-white z-100 sticky top-0 py-5 px-10"
+        className={`top-0 sticky w-full z-100 py-5 px-10 overflow-hidden ${isScrolled ? "backdrop-blur-3xl" : ""} `}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between ">
           <div className="text-gray-800 text-2xl lg:text-4xl font-bold logo">
             <a href="/">
               {" "}
@@ -45,12 +59,12 @@ const Header = () => {
 
           <div className="hidden md:flex">
             <div className="flex items-center gap-4">
-              <Link to="/login" className="text-white font-semibold">
+              <Link to="/login" className="font-bold tracking-wider text-black  ">
                 Login
               </Link>
               <Link
                 to="/register"
-                className="bg-white rounded-lg text-purple-800 font-semibold py-2 px-5"
+                className={`bg-purple-600 rounded-lg text-white font-semibold py-2 px-5 hover:scale-98 duration-200 `}
               >
                 Register
               </Link>
@@ -66,6 +80,19 @@ const Header = () => {
 
         {isMenuOpen && (
           <div className="mt-5">
+            <div className="py-2 md:flex">
+              <div className="flex items-center gap-4">
+                <Link to="/login" className="font-semibold ">
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className={`bg-purple-600 rounded-lg text-white font-semibold py-2 px-5 hover:scale-98 duration-200 `}
+                >
+                  Register
+                </Link>
+              </div>
+            </div>
             <nav className="flex flex-col gap-2 ">
               {navLinks.map((navLink) => (
                 <NavLink

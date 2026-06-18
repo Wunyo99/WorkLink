@@ -1,12 +1,12 @@
-import { Search, Upload } from "lucide-react";
+import { Search} from "lucide-react";
 import { Link } from "react-router-dom";
 const Hero = () => {
   return (
+    <>
     <section
       id="home"
-      className="relative h-screen flex items-center justify-center md:justify-start overflow-hidden"
+      className="relativ h-screen flex items-center justify-center md:justify-start overflow-hidden"
     >
-      {/* BACKGROUND IMAGE (FULL WIDTH) */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
@@ -15,7 +15,6 @@ const Hero = () => {
         }}
       />
 
-      {/* SMOOTH PURPLE BLEND OVERLAY */}
       <div
         className="absolute inset-0"
         style={{
@@ -25,7 +24,7 @@ const Hero = () => {
       />
       <div className="relative max-w-2xl px-6 md:px-15 text-center md:text-start space-y-10 z-10">
         <h1 className="text-4xl md:text-6xl text-white font-bold">
-          <span>Find your job</span> without any hassle
+          Get the <span className="text-yellow-200">right job</span> you deserve
         </h1>
 
         <p className="text-white/90 font-medium text-xl">
@@ -36,7 +35,7 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-5">
           <Link
             to="/jobs"
-            className="flex items-center gap-2 text-purple-800 bg-white py-4 px-10 rounded-2xl font-medium hover:text-white hover:bg-purple-500 duration-300"
+            className="flex items-center gap-2 text-purple-900 bg-white py-4 px-10 rounded-2xl font-medium hover:bg-yellow-200 duration-300"
           >
             <Search />
             <span>Find Jobs</span>
@@ -44,6 +43,7 @@ const Hero = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
