@@ -20,7 +20,7 @@ const Reviews = () => {
               <MoveLeft />
             </button>
 
-            <button className="swiper-next-btn bg-purple-200 text-purple-800 flex justify-center items-center rounded-full w-10 h-10">
+            <button className="swiper-next-btn bg-yellow-200 text-purple-800 flex justify-center items-center rounded-full w-10 h-10">
               <MoveRight />
             </button>
           </div>
@@ -45,7 +45,7 @@ const Reviews = () => {
           >
             {jobFinderReviews.map((reviewer, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-white border border-gray-300 px-4 py-8 rounded-2xl h-70 space-y-5">
+                <div className="bg-white border border-yellow-300 px-4 py-8 rounded-2xl h-70 space-y-5">
                   <div>
                     <LucideMessageSquareQuote
                       className="text-purple-800"

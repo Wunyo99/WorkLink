@@ -33,7 +33,7 @@ const Header = () => {
     <>
       <header
         style={{
-          background: `${isScrolled ? headerBg : ""}`,
+          background: `${isScrolled ? headerBg : headerBg}`,
         }}
         className={`top-0 sticky w-full z-100 py-5 px-10 overflow-hidden ${isScrolled ? "backdrop-blur-3xl" : ""} `}
       >

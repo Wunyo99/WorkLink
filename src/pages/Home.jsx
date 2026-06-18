@@ -72,7 +72,7 @@ const Home = () => {
           </div>
           <div className="md:mt-5 space-y-5">
             <h3 className="text-2xl lg:text-6xl font-bold text-gray-800 mb-5">
-              Flexible work opportunities
+              Flexible work <span className="text-purple-900">opportunities</span>
             </h3>
             <p className="lg:w-md text-gray-500">
               Explore opportunities to work on your terms, offering flexibility
@@ -146,7 +146,7 @@ const Home = () => {
         <div className="flex justify-center mt-10">
           <Link
             to="/jobs"
-            className="bg-purple-500 text-white py-2 px-8 rounded-full font-medium hover:scale-98 duration-200"
+            className="bg-purple-800 text-white py-2 px-8 rounded-full font-medium hover:scale-98 duration-200"
           >
             See All Jobs
           </Link>
@@ -174,7 +174,7 @@ const Home = () => {
           <div className="flex flex-col gap-7">
             {mission.map((mission, idx) => (
               <div key={idx} className="flex flex-col md:flex-row gap-5">
-                <div className="w-15 h-15 p-5 rounded-full flex items-center justify-center bg-purple-200 text-purple-800">
+                <div className="w-15 h-15 p-5 rounded-full flex items-center justify-center bg-yellow-200 text-purple-800">
                   {mission.icon}
                 </div>
                 <div className="">
