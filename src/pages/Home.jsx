@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import JobCard from "../components/JobCard";
 import Reviews from "../components/Reviews";
 import { toast } from "react-toastify";
+import { useJobs } from "../hooks/useJobs";
 import {
   LaptopMinimalCheck,
   LightbulbIcon,
@@ -12,6 +13,7 @@ import {
   UserPlus2,
 } from "lucide-react";
 const Home = () => {
+  const jobs = useJobs();
   const handleSubscribe = (e) => {
     e.preventDefault();
     toast.success("Thanks for subscribing");
@@ -72,7 +74,8 @@ const Home = () => {
           </div>
           <div className="md:mt-5 space-y-5">
             <h3 className="text-2xl lg:text-6xl font-bold text-gray-800 mb-5">
-              Flexible work <span className="text-purple-900">opportunities</span>
+              Flexible work{" "}
+              <span className="text-purple-900">opportunities</span>
             </h3>
             <p className="lg:w-md text-gray-500">
               Explore opportunities to work on your terms, offering flexibility
@@ -141,7 +144,7 @@ const Home = () => {
         <h3 className="text-2xl font-semibold text-gray-800">Trending Jobs</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
-          <JobCard limit={3} />
+          <JobCard jobs={jobs} limit={3} />
         </div>
         <div className="flex justify-center mt-10">
           <Link
@@ -213,11 +216,10 @@ const Home = () => {
               Never Want to Miss Any Job News?
             </h1>
             <p className="text-white font">
-              Subscribe to stay up-to-date on insights, events and new solutions.
+              Subscribe to stay up-to-date on insights, events and new
+              solutions.
             </p>
-            <p className="text-white">
-              You can unsubscribe at any time.
-            </p>
+            <p className="text-white">You can unsubscribe at any time.</p>
           </div>
           <div className="bg-white mx-auto w-fit overflow-hidden rounded-full">
             <form onSubmit={handleSubscribe} action="">

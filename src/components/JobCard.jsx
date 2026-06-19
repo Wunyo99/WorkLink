@@ -1,17 +1,23 @@
 import { Bookmark } from "lucide-react";
 import { jobListings } from "../data/jobListings";
 import { Link } from "react-router";
-const JobCard = ({ isJobPage = false, limit }) => {
-  const displayedJobs = limit ? jobListings.slice(0, limit) : jobListings;
+import { getLogoUrl } from "../utils/getLogo";
+import { companies } from "../data/companies";
+const JobCard = ({ isJobPage = false, limit, jobs = [] }) => {
+  const displayedJobs = limit ? jobs.slice(0, limit) : jobs;
+
   return (
     <>
       {displayedJobs.map((job) => (
         <div key={job.id} className="shadow p-5 space-y-3">
           <div className="flex items-center justify-between mb-5">
-            <div className="w-10 h-10 rounded-xl bg-gray-800">
-              <img src={job.logo} alt="" />
+            <div className="w-10 h-10 rounded-xl ">
+              <img
+                src={getLogoUrl(`${job.companyId}.com`)}
+                className="w-10 h-10 rounded-lg"
+              />
             </div>
-            <button className="border-2 border-gray-800 rounded-full p-2">
+            <button className="">
               <Bookmark className="text-purple-800" />
             </button>
           </div>
@@ -24,13 +30,13 @@ const JobCard = ({ isJobPage = false, limit }) => {
               </span>
             </div>
             <div className="text-sm text-gray-500 font-medium flex gap-2">
-              <p className="">{job.company}</p>
+              <p className="capitalize">{job.companyId}</p>
               <span>-</span>
               <p>{job.location}</p>
             </div>
           </div>
           <div>
-            <p>{job.shortDescription}</p>
+            <p>{job.description}</p>
           </div>
           <div className="flex items-center gap-4">
             <Link className="bg-gray-800 text-white py-2 px-4 font-medium rounded-lg hover:scale-95 duration-300">
