@@ -3,13 +3,14 @@ import { jobListings } from "../data/jobListings";
 import { Link } from "react-router";
 import { getLogoUrl } from "../utils/getLogo";
 import { companies } from "../data/companies";
-const JobCard = ({ isJobPage = false, limit, jobs = [] }) => {
+
+const JobCard = ({ jobs, limit }) => {
   const displayedJobs = limit ? jobs.slice(0, limit) : jobs;
 
   return (
     <>
       {displayedJobs.map((job) => (
-        <div key={job.id} className="shadow p-5 space-y-3">
+        <div key={job.id} className="border-2 border-gray-200 rounded-2xl p-5 space-y-3 hover:shadow-xl duration-200">
           <div className="flex items-center justify-between mb-5">
             <div className="w-10 h-10 rounded-xl ">
               <img
@@ -39,7 +40,7 @@ const JobCard = ({ isJobPage = false, limit, jobs = [] }) => {
             <p>{job.description}</p>
           </div>
           <div className="flex items-center gap-4">
-            <Link className="bg-gray-800 text-white py-2 px-4 font-medium rounded-lg hover:scale-95 duration-300">
+            <Link to={`/jobs/${job.id}`} className="bg-gray-800 text-white py-2 px-4 font-medium rounded-lg hover:scale-95 duration-300">
               View Details
             </Link>
             <button className="bg-purple-200 text-purple-800 font-medium py-2 px-4 rounded-lg cursor-pointer hover:scale-95 duration-300">
