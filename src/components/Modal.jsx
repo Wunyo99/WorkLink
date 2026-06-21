@@ -1,48 +1,21 @@
-import { useRef } from "react";
+import { createPortal } from "react-dom";
 
-const Modal = () => {
-  const dialogRef = useRef();
+const Modal = ({ children, open, onClose }) => {
+  if (!open) return null;
 
-  function openModal() {
-    dialogRef.current.showModal();
-  }
-
-  function closeModal() {
-    dialogRef.current.close();
-  }
-
-  return (
-    <>
-      <button
-        onClick={openModal}
-        className="bg-purple-600 text-white px-5 py-2 rounded"
+  return createPortal(
+    <div
+      className="fixed inset-0 z-150 bg-black/30 backdrop-blur-sm flex justify-center items-start overflow-y-auto py-10"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white border border-gray-200 p-5 rounded-lg w-[95%] md:w-150 max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
       >
-        Open Modal
-      </button>
-
-      <dialog
-        ref={dialogRef}
-        onClick={(e) => {
-          if (e.target === dialogRef.current) {
-            dialogRef.current.close();
-          }
-        }}
-        className="rounded-xl p-0 w-100 backdrop:bg-black/50"
-      >
-        <div className="p-6">
-          <h2 className="text-2xl font-bold">Welcome</h2>
-
-          <p className="mt-3">This modal is controlled using useRef.</p>
-
-          <button
-            onClick={closeModal}
-            className="mt-6 bg-red-500 text-white px-4 py-2 rounded"
-          >
-            Close
-          </button>
-        </div>
-      </dialog>
-    </>
+        {children}
+      </div>
+    </div>,
+    document.getElementById("modal")
   );
 };
 

@@ -1,9 +1,9 @@
-import { ThreeDots } from "react-loader-spinner";
+import { MutatingDots } from "react-loader-spinner";
 
 const Spinner = () => {
   return (
     <div className="flex items-center justify-center h-screen">
-      <ThreeDots
+      <MutatingDots
         height={100}
         width={100}
         color="#622a8e"
@@ -11,7 +11,7 @@ const Spinner = () => {
         wrapperClass=""
         visible={true}
         ariaLabel="oval-loading"
-        secondaryColor="#4fa94d"
+        secondaryColor="#1e2939"
         strokeWidth={2}
         strokeWidthSecondary={2}
       />
