@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, User, X } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
@@ -16,6 +16,10 @@ const Header = () => {
     { name: "Contact", path: "/contact" },
   ];
 
+  const location = useLocation();
+
+  const isHome = location.pathname === "/";
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -30,6 +34,8 @@ const Header = () => {
       ? " font-bold text-yellow-200 text-lg"
       : "text-white font-medium hover:text-yellow-200 transition duration-300";
 
+  const showHeaderBg = !isHome || isScrolled;
+
   const headerBg =
     "linear-gradient(to right, rgba(88, 28, 135, 0.95) 0%, rgba(88, 28, 135, 0.7) 35%, rgba(88, 28, 135, 0.2) 60%, rgba(88, 28, 135, 0) 100%)";
 
@@ -37,7 +43,7 @@ const Header = () => {
     <>
       <header
         style={{
-          background: `${isScrolled ? headerBg : headerBg}`,
+          background: showHeaderBg ? headerBg : "transparent",
         }}
         className={`top-0 sticky w-full z-100 py-5 px-10 overflow-hidden ${isScrolled ? "backdrop-blur-3xl" : ""} `}
       >
