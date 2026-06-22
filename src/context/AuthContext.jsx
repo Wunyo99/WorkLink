@@ -7,14 +7,14 @@ import {
 } from "firebase/auth";
 import { toast } from "react-toastify";
 import { auth, db } from "../firebase/firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 
 export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  console.log("creating user")
+  console.log("creating user");
   const handleSignUp = async (
     firstname,
     lastname,
@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
         email,
         password,
       );
-      console.log("user Created")
+      console.log("user Created");
       const user = userCredential.user;
 
       await setDoc(doc(db, "users", user.uid), {
@@ -75,8 +75,22 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubcribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        const docRef = doc(db, "users", currentUser.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setUser({
+            ...currentUser,
+            ...docSnap.data(),
+          });
+        } else {
+          setUser(currentUser);
+        }
+      } else {
+        setUser(null);
+      }
       setLoading(false);
     });
     return unsubcribe;

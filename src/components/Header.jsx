@@ -1,17 +1,22 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, User, X } from "lucide-react";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const { user, profile, loading } = useContext(AuthContext);
+  console.log(user);
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Find Jobs", path: "/jobs" },
     { name: "Contact", path: "/contact" },
   ];
 
-    useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
@@ -24,7 +29,6 @@ const Header = () => {
     isActive
       ? " font-bold text-yellow-200 text-lg"
       : "text-white font-medium hover:text-yellow-200 transition duration-300";
-
 
   const headerBg =
     "linear-gradient(to right, rgba(88, 28, 135, 0.95) 0%, rgba(88, 28, 135, 0.7) 35%, rgba(88, 28, 135, 0.2) 60%, rgba(88, 28, 135, 0) 100%)";
@@ -56,19 +60,35 @@ const Header = () => {
               </NavLink>
             ))}
           </nav>
-
           <div className="hidden md:flex">
-            <div className="flex items-center gap-4">
-              <Link to="/login" className="font-bold tracking-wider text-black  ">
-                Login
+            {user ? (
+              <Link to="/profile">
+                <div className="bg-purple-800 flex items-center gap-4 pe-4 rounded-full">
+                  <div className="bg-yellow-200 p-1 rounded-full">
+                    <User />
+                  </div>
+                  <p className="text-white font-medium">
+                    {user.firstname.charAt(0)}
+                    {user.lastname.charAt(0)}
+                  </p>
+                </div>
               </Link>
-              <Link
-                to="/register"
-                className={`bg-purple-600 rounded-lg text-white font-semibold py-2 px-5 hover:scale-98 duration-200 `}
-              >
-                Register
-              </Link>
-            </div>
+            ) : (
+              <div className="flex items-center gap-4">
+                <Link
+                  to="/login"
+                  className="font-bold tracking-wider text-black  "
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className={`bg-purple-600 rounded-lg text-white font-semibold py-2 px-5 hover:scale-98 duration-200 `}
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className=" md:hidden">
@@ -82,18 +102,37 @@ const Header = () => {
           <div className="mt-5">
             <div className="py-2 md:flex">
               <div className="flex items-center gap-4">
-                <Link to="/login" className="font-semibold ">
-                  Login
-                </Link>
-                <Link
-                  to="/register"
-                  className={`bg-purple-600 rounded-lg text-white font-semibold py-2 px-5 hover:scale-98 duration-200 `}
-                >
-                  Register
-                </Link>
+                {user ? (
+                  <Link to="/profile">
+                    <div className="bg-purple-800 flex items-center gap-4 pe-4 rounded-full">
+                      <div className="bg-yellow-200 p-1 rounded-full">
+                        <User />
+                      </div>
+                      <p className="text-white font-medium">
+                        {user.firstname.charAt(0)}
+                        {user.lastname.charAt(0)}
+                      </p>
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="flex items-center gap-4">
+                    <Link
+                      to="/login"
+                      className="font-bold tracking-wider text-black  "
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/register"
+                      className={`bg-purple-600 rounded-lg text-white font-semibold py-2 px-5 hover:scale-98 duration-200 `}
+                    >
+                      Register
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
-            <nav className="flex flex-col gap-2 ">
+            <nav className="flex flex-col gap-2 mt-2 ">
               {navLinks.map((navLink) => (
                 <NavLink
                   key={navLink.name}
