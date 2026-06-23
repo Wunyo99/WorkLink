@@ -6,7 +6,7 @@ import { companies } from "../data/companies";
 import { useState } from "react";
 import Modal from "./Modal";
 import ApplyForm from "./ApplyForm";
-
+import { Check } from "lucide-react";
 const JobCard = ({ jobs, limit }) => {
   // const [open, setOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -88,20 +88,25 @@ const JobCard = ({ jobs, limit }) => {
         )}
       </div>
       <div>
-        { showThankYou && (
+        {showThankYou && (
           <Modal open={showThankYou} onClose={() => setShowThankYou(false)}>
-            <div className="text-center space-y-4 py-6">
-              <h2 className="text-2xl font-bold text-green-600">
-                Application Submitted!
-              </h2>
+            <div className="text-center flex flex-col gap-3 justify-center items-center space-y-4 py-6">
+              <div className="w-18 h-18 rounded-full flex items-center justify-center bg-gray-100">
+                <Check className="text-green-500" size={35} />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-green-600">
+                  Application Submitted!
+                </h2>
 
-              <p className="text-gray-600">
-                Thank you for applying. We’ll get back to you soon.
-              </p>
+                <p className="text-gray-600">
+                  Thank you for applying. We’ll get back to you soon.
+                </p>
+              </div>
 
               <button
                 onClick={() => setShowThankYou(false)}
-                className="bg-purple-800 text-white px-5 py-2 rounded-lg"
+                className="bg-purple-800 text-white px-10 py-2 rounded-lg cursor-pointer hover:scale-97 duration-200"
               >
                 Close
               </button>

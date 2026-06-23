@@ -1,6 +1,11 @@
+import { useState } from "react";
+
 const ApplyForm = ({ job, onSuccess }) => {
+  const [isApplying, setIsApplying] = useState(false);
+  console.log("Job:", job);
   const handleApply = async (e) => {
     e.preventDefault();
+    setIsApplying(true);
     const formData = new FormData(e.target);
     const application = {
       ...Object.fromEntries(formData.entries()),
@@ -10,9 +15,12 @@ const ApplyForm = ({ job, onSuccess }) => {
     // const { fullname, email, phone, cv, addInfo } = application;
 
     console.log(application);
-    e.target.reset();
 
-    onSuccess?.();
+    setTimeout(() => {
+      setIsApplying(false);
+      onSuccess?.();
+      e.target.reset();
+    }, 2000);
   };
   return (
     <>
@@ -80,14 +88,37 @@ const ApplyForm = ({ job, onSuccess }) => {
           </div>
           <div className="flex gap-2 items-center mt-4">
             <input name="agreement" type="checkbox" required />
-            <label htmlFor="agree">I certify that the information provided is accurate.</label>
+            <label htmlFor="agree">
+              I certify that the information provided is accurate.
+            </label>
           </div>
           <button
-            // disabled={mutation.isPending}
-            className="w-full justify-center px-10 py-2 text-white bg-purple-800 font-semibold text-lg rounded-lg mt-5  hover:scale-99 duration-300 cursor-pointer"
+            disabled={isApplying}
+            className="w-full justify-center px-10 py-2 text-white bg-purple-800 font-semibold text-lg rounded-lg mt-5  hover:scale-99 duration-300 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            {/* {mutation.isPending ? "Applying..." : "Apply"} */}
-            Apply
+            {isApplying ? (
+              <span className="flex items-center justify-center gap-3">
+                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    fill="none"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  />
+                </svg>
+                Applying...
+              </span>
+            ) : (
+              "Apply"
+            )}
           </button>
         </div>
       </form>
