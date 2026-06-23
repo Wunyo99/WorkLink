@@ -3,14 +3,47 @@ import { jobListings } from "../data/jobListings";
 import { Link } from "react-router";
 import { getLogoUrl } from "../utils/getLogo";
 import { companies } from "../data/companies";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { toast } from "react-toastify";
 import Modal from "./Modal";
 import ApplyForm from "./ApplyForm";
 import { Check } from "lucide-react";
+import { AuthContext } from "../context/AuthContext";
+import { db } from "../firebase/firebase";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+
 const JobCard = ({ jobs, limit }) => {
-  // const [open, setOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   const [showThankYou, setShowThankYou] = useState(false);
+
+  const [localSavedJobs, setLocalSavedJobs] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  const savedJobs = user?.savedJobs || [];
+  const handleSaveJob = async (jobId) => {
+    if (!user) return toast.error("Please login");
+
+    const userRef = doc(db, "users", user.uid);
+
+    const isSaved = localSavedJobs.includes(jobId);
+
+    try {
+      await updateDoc(userRef, {
+        savedJobs: isSaved ? arrayRemove(jobId) : arrayUnion(jobId),
+      });
+
+      setLocalSavedJobs((prev) =>
+        isSaved ? prev.filter((id) => id !== jobId) : [...prev, jobId],
+      );
+
+      toast.success(isSaved ? "Removed from saved" : "Job saved");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    setLocalSavedJobs(user?.savedJobs || []);
+  }, [user]);
 
   const displayedJobs = limit ? jobs.slice(0, limit) : jobs;
   return (
@@ -27,8 +60,14 @@ const JobCard = ({ jobs, limit }) => {
                 className="w-10 h-10 rounded-lg"
               />
             </div>
-            <button className="">
-              <Bookmark className="text-purple-800" />
+            <button onClick={() => handleSaveJob(job.id)}>
+              <Bookmark
+                className={`cursor-pointer ${
+                  localSavedJobs.includes(job.id)
+                    ? "text-purple-800 fill-purple-800"
+                    : "text-gray-400"
+                }`}
+              />
             </button>
           </div>
           <div>

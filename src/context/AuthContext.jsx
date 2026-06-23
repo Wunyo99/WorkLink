@@ -84,6 +84,7 @@ const AuthProvider = ({ children }) => {
           setUser({
             ...currentUser,
             ...docSnap.data(),
+            savedJobs: docSnap.data()?.savedJobs || []
           });
         } else {
           setUser(currentUser);
