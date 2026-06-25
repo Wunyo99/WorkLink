@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ChevronsLeft, ChevronsRight, Funnel } from "lucide-react";
 import { X } from "lucide-react";
 import { Search } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Jobs = () => {
   const [filters, setFilters] = useState({
@@ -564,9 +565,14 @@ const Jobs = () => {
           </div>
 
           {hasJobs ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
               <JobCard jobs={currentJobs} />
-            </div>
+            </motion.div>
           ) : (
             <div className="flex flex-col items-center justify-center py-20 text-center">
               <h2 className="text-xl font-semibold text-gray-700">

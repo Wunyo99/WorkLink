@@ -48,7 +48,7 @@ const Header = () => {
         className={`top-0 sticky w-full z-100 py-5 px-10 overflow-hidden ${isScrolled ? "backdrop-blur-3xl" : ""} `}
       >
         <div className="flex items-center justify-between ">
-          <div className="text-gray-800 text-2xl lg:text-4xl font-bold logo">
+          <div className="text-gray-800 text-2xl lg:text-3xl font-bold logo">
             <a href="/">
               {" "}
               <span className="text-white">Work</span>-Link
@@ -145,6 +145,7 @@ const Header = () => {
                   key={navLink.name}
                   to={navLink.path}
                   className={linkClass}
+                  onClick={()=>setIsMenuOpen(!isMenuOpen)}
                 >
                   {navLink.name}
                 </NavLink>

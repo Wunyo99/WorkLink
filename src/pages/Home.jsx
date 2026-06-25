@@ -4,6 +4,7 @@ import JobCard from "../components/JobCard";
 import Reviews from "../components/Reviews";
 import { toast } from "react-toastify";
 import { useJobs } from "../hooks/useJobs";
+import { motion } from "framer-motion";
 import {
   LaptopMinimalCheck,
   LightbulbIcon,
@@ -67,7 +68,13 @@ const Home = () => {
       </section>
 
       <section className="section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-10"
+        >
           <div className="w-full">
             <img
               className="w-full h-ful object-cover rounded-lg"
@@ -105,7 +112,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="section-padding bg-purple-50">
@@ -119,7 +126,11 @@ const Home = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {steps.map((step) => (
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
               key={step.h1}
               className="border-2 rounded-lg border-gray-800 shadow w-80 mx-auto p-5 hover:scale-102 hover:shadow-xl duration-300"
             >
@@ -138,7 +149,7 @@ const Home = () => {
                   {step.linkName}
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -146,9 +157,15 @@ const Home = () => {
       <section className="section-padding">
         <h3 className="text-2xl font-semibold text-gray-800">Trending Jobs</h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5"
+        >
           <JobCard jobs={jobs} limit={3} />
-        </div>
+        </motion.div>
         <div className="flex justify-center mt-10">
           <Link
             to="/jobs"
@@ -213,7 +230,12 @@ const Home = () => {
       </section>
 
       <section className="section-padding">
-        <div className="bg-purple-500 p-10 rounded-2xl max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-purple-500 p-10 rounded-2xl max-w-4xl mx-auto"
+        >
           <div className="text-center mb-5">
             <h1 className="text-2xl md:text-4xl font-bold text-gray-800 md:max-w-md mx-auto mb-5">
               Never Want to Miss Any Job News?
@@ -239,7 +261,7 @@ const Home = () => {
               </div>
             </form>
           </div>
-        </div>
+        </motion.div>
       </section>
     </>
   );

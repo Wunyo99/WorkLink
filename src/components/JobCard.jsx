@@ -11,6 +11,7 @@ import { Check } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase/firebase";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { motion } from "framer-motion";
 
 const JobCard = ({ jobs, limit }) => {
   const [selectedJob, setSelectedJob] = useState(null);
@@ -55,7 +56,9 @@ const JobCard = ({ jobs, limit }) => {
   return (
     <>
       {displayedJobs.map((job) => (
-        <div
+        <motion.div
+          whileHover={{ y: -5 }}
+          transition={{ duration: 0.6 }}
           key={job.id}
           className="border-2 border-gray-200 rounded-2xl p-5 space-y-3 hover:shadow-xl duration-200"
         >
@@ -107,7 +110,7 @@ const JobCard = ({ jobs, limit }) => {
               Apply Now
             </button>
           </div>
-        </div>
+        </motion.div>
       ))}
       <div>
         {selectedJob && (

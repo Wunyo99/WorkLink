@@ -8,6 +8,7 @@ import ApplyForm from "../components/ApplyForm";
 import { useState } from "react";
 import Modal from "../components/Modal";
 import { Check } from "lucide-react";
+import { motion } from "framer-motion";
 const JobDetails = () => {
   const [showThankYou, setShowThankYou] = useState(false);
 
@@ -30,7 +31,6 @@ const JobDetails = () => {
 
   if (!job) return <p>Job not found</p>;
 
-
   const formatSalary = (salary) =>
     new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -39,7 +39,11 @@ const JobDetails = () => {
     }).format(salary);
   return (
     <section className="section-padding grid grid-cols-1 lg:grid-cols-2 gap-10">
-      <div className="space-y-5">
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="space-y-5"
+      >
         <div>
           <h4 className="text-2xl font-medium mb-">About this role</h4>
           <div className="w-10 h-1 bg-purple-800" />
@@ -115,23 +119,23 @@ const JobDetails = () => {
           </div>
         </div>
 
-        {/* <div>
-          <h4 className="font-medium mb-2 text-purple-800 text-xl">Vacancy:</h4>
-          <p className="font-bold">{job.vacancies}</p>
-        </div> */}
         <div>
           <h4 className="font-medium text-purple-800 text-xl">Email:</h4>
           <p className="font-semibold">{job.contactEmail}</p>
         </div>
-      </div>
-      <div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+      >
         <ApplyForm
           job={job}
           onSuccess={() => {
             setShowThankYou(true); // open thank you modal
           }}
         />
-      </div>
+      </motion.div>
 
       {showThankYou && (
         <Modal open={showThankYou} onClose={() => setShowThankYou(false)}>
