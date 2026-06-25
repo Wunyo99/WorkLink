@@ -30,7 +30,6 @@ const JobDetails = () => {
 
   if (!job) return <p>Job not found</p>;
 
-  // const mutation = useMutation();
 
   const formatSalary = (salary) =>
     new Intl.NumberFormat("en-US", {
@@ -39,7 +38,7 @@ const JobDetails = () => {
       maximumFractionDigits: 0,
     }).format(salary);
   return (
-    <section className="section-padding grid grid-cols-1 md:grid-cols-2 gap-10">
+    <section className="section-padding grid grid-cols-1 lg:grid-cols-2 gap-10">
       <div className="space-y-5">
         <div>
           <h4 className="text-2xl font-medium mb-">About this role</h4>
@@ -87,32 +86,35 @@ const JobDetails = () => {
           </div>
         </div>
 
-        <div>
-          <h4 className="font-medium mb-2 text-purple-800 text-xl">
-            Requirements:
-          </h4>
-          <div className="flex flex-col gap-4">
-            {job.requirements.map((req) => (
-              <div key={req} className="flex items-center gap-2">
-                <CheckCircle className="text-green-700" size={18} />
-                <p className="font-medium">{req}</p>
-              </div>
-            ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-5">
+          <div>
+            <h4 className="font-medium mb-2 text-purple-800 text-xl">
+              Requirements:
+            </h4>
+            <div className="flex flex-col gap-4">
+              {job.requirements.map((req) => (
+                <div key={req} className="flex items-center gap-2">
+                  <CheckCircle className="text-green-700" size={18} />
+                  <p className="font-medium">{req}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h4 className="font-medium mb-2 text-purple-800 text-xl">
+              Responsibilities:
+            </h4>
+            <div className="flex flex-col gap-4">
+              {job.responsibilities.map((res) => (
+                <div key={res} className="flex items-center gap-2">
+                  <CheckCircle className="text-green-700" size={18} />
+                  <p className="font-medium">{res}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <div>
-          <h4 className="font-medium mb-2 text-purple-800 text-xl">
-            Responsibilities:
-          </h4>
-          <div className="flex flex-col gap-4">
-            {job.responsibilities.map((res) => (
-              <div key={res} className="flex items-center gap-2">
-                <CheckCircle className="text-green-700" size={18} />
-                <p className="font-medium">{res}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+
         {/* <div>
           <h4 className="font-medium mb-2 text-purple-800 text-xl">Vacancy:</h4>
           <p className="font-bold">{job.vacancies}</p>

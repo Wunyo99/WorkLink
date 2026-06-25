@@ -24,19 +24,22 @@ const Home = () => {
       icon: <UserPlus2 />,
       h1: "Create account",
       p: "it's very easy to open an accountand start your journey.",
-      link: "Register",
+      linkName: "Register",
+      link: "register",
     },
     {
       icon: <LucideUserCheck2 />,
       h1: "Complete your profile",
       p: "Complete your profile with all the info to get attention of client.",
-      link: "Update profile",
+      linkName: "Update profile",
+      link: "profile",
     },
     {
       icon: <Send />,
       h1: "Apply Job",
       p: "Apply and get your preferable jobs with all the requirements and get it.",
-      link: "Apply Now",
+      linkName: "Apply Now",
+      link: "jobs",
     },
   ];
 
@@ -130,9 +133,9 @@ const Home = () => {
                 <p className="text-whit ">{step.p}</p>
                 <Link
                   className="underline font-medium text-purple-800"
-                  to="/{step.link}"
+                  to={step.link}
                 >
-                  {step.link}
+                  {step.linkName}
                 </Link>
               </div>
             </div>
