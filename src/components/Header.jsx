@@ -74,8 +74,9 @@ const Header = () => {
                     <User />
                   </div>
                   <p className="text-white font-medium">
-                    {user.firstname.charAt(0)}
-                    {user.lastname.charAt(0)}
+                    {/* {user.firstname.charAt(0)}
+                    {user.lastname.charAt(0)} */}
+                    {user.firstname}
                   </p>
                 </div>
               </Link>

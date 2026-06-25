@@ -45,6 +45,12 @@ const JobCard = ({ jobs, limit }) => {
     setLocalSavedJobs(user?.savedJobs || []);
   }, [user]);
 
+  const handleApply = (job) => {
+    if (!user) {
+      return toast.error("Please login to apply");
+    }
+    setSelectedJob(job);
+  };
   const displayedJobs = limit ? jobs.slice(0, limit) : jobs;
   return (
     <>
@@ -95,7 +101,7 @@ const JobCard = ({ jobs, limit }) => {
               View Details
             </a>
             <button
-              onClick={() => setSelectedJob(job)}
+              onClick={() => handleApply(job)}
               className="bg-purple-200 text-purple-800 font-medium py-2 px-4 rounded-lg cursor-pointer hover:scale-95 duration-300"
             >
               Apply Now

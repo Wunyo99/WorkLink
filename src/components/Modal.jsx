@@ -5,11 +5,11 @@ const Modal = ({ children, open, onClose }) => {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-150 bg-black/30 backdrop-blur-sm flex justify-center items-start overflow-y-auto py-10"
+      className="fixed inset-0 z-150 bg-black/30 backdrop-blur-sm flex justify-center items-start py-10"
       onClick={onClose}
     >
       <div
-        className="bg-white border border-gray-200 p-5 rounded-lg w-[95%] md:w-150 max-h-[90vh] overflow-y-auto"
+        className="bg-white border border-gray-200 p-5 rounded-lg w-[95%] md:w-150 max-h-[90vh] overflow-y-scroll"
         onClick={(e) => e.stopPropagation()}
       >
         {children}

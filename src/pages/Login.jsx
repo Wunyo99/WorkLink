@@ -43,7 +43,7 @@ const Login = () => {
         <div className="max-w-xl lg:w-1/3 mx-auto mt-10 border border-gray-300 rounded-xl bg-white shadow-2xl py-5 px-10 ">
           <div className="mb-5">
             <p className="text-5xl text-gray-800 font-bold">Login</p>
-            <div className="w-14 h-1 bg-purple-500"></div>
+            <div className="w-14 h-1 bg-purple-800"></div>
           </div>
           <form onSubmit={handleLoginSubmit}>
             <div className="flex flex-col gap-2">
@@ -52,7 +52,7 @@ const Login = () => {
                 className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-500 rounded-lg"
                 type="email"
                 name="email"
-                placeholder="johndode@gmail.com"
+                placeholder="johndoe@gmail.com"
                 required
               />
             </div>
@@ -88,7 +88,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={isLoggingIn}
-              className={`w-full justify-center px-10 py-2 text-white bg-purple-500 font-semibold text-lg rounded-lg mt-5  hover:scale-99 duration-300 ${isLoggingIn ? "opacity-70 cursor-not-allowed" : "cursor-pointer"}`}
+              className={`w-full justify-center px-10 py-2 text-white bg-purple-800 font-semibold text-lg rounded-lg mt-5  hover:scale-99 duration-300 ${isLoggingIn ? "opacity-70 cursor-not-allowed" : "cursor-pointer"}`}
 
             >
               {isLoggingIn ? (
@@ -119,7 +119,7 @@ const Login = () => {
             <div className="mt-2 text-center">
               <p className="text-sm font-semibold">
                 Don't have an account?{" "}
-                <span className="text-purple-500 font-semibold">
+                <span className="text-purple-800 font-semibold">
                   <a href="/register">Register</a>
                 </span>
               </p>
