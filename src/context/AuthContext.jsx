@@ -99,6 +99,7 @@ const AuthProvider = ({ children }) => {
 
   const ctxValue = {
     user,
+    setUser,
     loading,
     handleLogin,
     handleSignUp,
