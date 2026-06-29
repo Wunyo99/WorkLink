@@ -6,7 +6,7 @@ import { useState } from "react";
 import { ChevronsLeft, ChevronsRight, Funnel } from "lucide-react";
 import { X } from "lucide-react";
 import { Search } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Jobs = () => {
   const [filters, setFilters] = useState({
@@ -362,203 +362,213 @@ const Jobs = () => {
               <div className="bg-purple-200 py-1 px-2 rounded-full text-purple-800 font-medium">
                 <button
                   onClick={() => setIsFilterOpen(!isFilterOpen)}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 cursor-pointer"
                 >
                   <Funnel size={16} />
                   <span>Filter</span>
                 </button>
               </div>
+              <AnimatePresence>
+                {isFilterOpen && (
+                  <>
+                    <motion.div
+                      initial={{ x: "-100%", opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: "-100%", opacity: 0 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="bg-white fixed p-5 inset-0 z-100 md:w-[65%] overflow-y-auto"
+                    >
+                      <div className="bg-white rounded-2xl md:w-120 mx-aut flex flex-col border-2 h-fit border-purple-800 p-5">
+                        {" "}
+                        <div className="flex items-center justify-between">
+                          <h5 className="text-xl font-medium py-2">Filters</h5>
 
-              {isFilterOpen && (
-                <>
-                  <div className="bg-white fixed p-5 inset-0 z-100 md:w-[50%] overflow-y-auto">
-                    <div className="bg-white rounded-2xl md:w-120 mx-aut flex flex-col border-2 h-fit border-purple-800 p-5">
-                      {" "}
-                      <div className="flex items-center justify-between">
-                        <h5 className="text-xl font-medium py-2">Filters</h5>
+                          <button
+                            onClick={() => setIsFilterOpen(!isFilterOpen)}
+                            className="cursor-pointer"
+                          >
+                            <X />
+                          </button>
+                        </div>
+                        <hr className="text-gray-300" />
+                        <div className="py-5">
+                          <h5 className="text-sm font-medium mb-2">Sort By</h5>
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="flex items-center gap-1">
+                              <input
+                                type="radio"
+                                name="sort"
+                                checked={filters.sort === "az"}
+                                onChange={() =>
+                                  setFilters((prev) => ({
+                                    ...prev,
+                                    sort: "az",
+                                  }))
+                                }
+                              />
+                              <p className="text-sm font-medium">A-Z</p>
+                            </div>
 
-                        <button onClick={() => setIsFilterOpen(!isFilterOpen)}>
-                          <X />
+                            <div className="flex items-center gap-1">
+                              <input
+                                type="radio"
+                                name="sort"
+                                checked={filters.sort === "salary"}
+                                onChange={() =>
+                                  setFilters((prev) => ({
+                                    ...prev,
+                                    sort: "salary",
+                                  }))
+                                }
+                              />
+                              <p className="text-sm font-medium">Top Salary</p>
+                            </div>
+
+                            <div className="flex items-center gap-1">
+                              <input
+                                type="radio"
+                                name="sort"
+                                checked={filters.sort === "trending"}
+                                onChange={() =>
+                                  setFilters((prev) => ({
+                                    ...prev,
+                                    sort: "trending",
+                                  }))
+                                }
+                              />
+                              <p className="text-sm font-medium">Trending</p>
+                            </div>
+                          </div>
+                        </div>
+                        <hr className="text-gray-300" />
+                        <div className="py-5">
+                          <h5 className="text-sm font-medium mb-2">Salary</h5>
+
+                          <div className="grid grid-cols-2 gap-2">
+                            <label className="flex items-center gap-2 text-sm font-medium">
+                              <input
+                                type="radio"
+                                name="salary"
+                                checked={filters.salaryRange === "0-5000"}
+                                onChange={() =>
+                                  setFilters((prev) => ({
+                                    ...prev,
+                                    salaryRange: "0-5000",
+                                  }))
+                                }
+                              />
+                              0 - 5k
+                            </label>
+
+                            <label className="flex items-center gap-2 text-sm font-medium">
+                              <input
+                                type="radio"
+                                name="salary"
+                                checked={filters.salaryRange === "5000-10000"}
+                                onChange={() =>
+                                  setFilters((prev) => ({
+                                    ...prev,
+                                    salaryRange: "5000-10000",
+                                  }))
+                                }
+                              />
+                              5k - 10k
+                            </label>
+
+                            <label className="flex items-center gap-2 text-sm font-medium">
+                              <input
+                                type="radio"
+                                name="salary"
+                                checked={filters.salaryRange === "10000-15000"}
+                                onChange={() =>
+                                  setFilters((prev) => ({
+                                    ...prev,
+                                    salaryRange: "10000-15000",
+                                  }))
+                                }
+                              />
+                              10k - 15k
+                            </label>
+
+                            <label className="flex items-center gap-2 text-sm font-medium">
+                              <input
+                                type="radio"
+                                name="salary"
+                                checked={filters.salaryRange === "15000+"}
+                                onChange={() =>
+                                  setFilters((prev) => ({
+                                    ...prev,
+                                    salaryRange: "15000+",
+                                  }))
+                                }
+                              />
+                              15k+
+                            </label>
+                          </div>
+                        </div>
+                        <hr className="text-gray-300" />
+                        <div className="py-5">
+                          <h5 className="text-sm font-medium mb-2">Job Type</h5>
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="checkbox"
+                                checked={filters.jobTypes.includes("Full-Time")}
+                                onChange={() => handleJobType("Full-Time")}
+                              />
+                              <p className="text-sm font-medium">Full-time</p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="checkbox"
+                                checked={filters.jobTypes.includes("Part-Time")}
+                                onChange={() => handleJobType("Part-Time")}
+                              />{" "}
+                              <p className="text-sm font-medium">Part-time</p>
+                            </div>
+                          </div>
+                        </div>
+                        <hr className="text-gray-300" />
+                        <div className="py-5">
+                          <h5 className="text-sm font-medium mb-2">Location</h5>
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="checkbox"
+                                checked={filters.locations.includes("Remote")}
+                                onChange={() => handleJobLocation("Remote")}
+                              />{" "}
+                              <p className="text-sm font-medium">Remote</p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="checkbox"
+                                checked={filters.locations.includes("Onsite")}
+                                onChange={() => handleJobLocation("Onsite")}
+                              />{" "}
+                              <p className="text-sm font-medium">On-site</p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="checkbox"
+                                checked={filters.locations.includes("Hybrid")}
+                                onChange={() => handleJobLocation("Hybrid")}
+                              />{" "}
+                              <p className="text-sm font-medium">Hybrid</p>
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          onClick={resetFilters}
+                          className="bg-purple-300 p-2 rounded-lg text-purple-800 font-medium cursor-pointer hover:scale-x-97 duration-300"
+                        >
+                          Reset
                         </button>
                       </div>
-                      <hr className="text-gray-300" />
-                      <div className="py-5">
-                        <h5 className="text-sm font-medium mb-2">Sort By</h5>
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="flex items-center gap-1">
-                            <input
-                              type="radio"
-                              name="sort"
-                              checked={filters.sort === "az"}
-                              onChange={() =>
-                                setFilters((prev) => ({
-                                  ...prev,
-                                  sort: "az",
-                                }))
-                              }
-                            />
-                            <p className="text-sm font-medium">A-Z</p>
-                          </div>
-
-                          <div className="flex items-center gap-1">
-                            <input
-                              type="radio"
-                              name="sort"
-                              checked={filters.sort === "salary"}
-                              onChange={() =>
-                                setFilters((prev) => ({
-                                  ...prev,
-                                  sort: "salary",
-                                }))
-                              }
-                            />
-                            <p className="text-sm font-medium">Top Salary</p>
-                          </div>
-
-                          <div className="flex items-center gap-1">
-                            <input
-                              type="radio"
-                              name="sort"
-                              checked={filters.sort === "trending"}
-                              onChange={() =>
-                                setFilters((prev) => ({
-                                  ...prev,
-                                  sort: "trending",
-                                }))
-                              }
-                            />
-                            <p className="text-sm font-medium">Trending</p>
-                          </div>
-                        </div>
-                      </div>
-                      <hr className="text-gray-300" />
-                      <div className="py-5">
-                        <h5 className="text-sm font-medium mb-2">Salary</h5>
-
-                        <div className="grid grid-cols-2 gap-2">
-                          <label className="flex items-center gap-2 text-sm font-medium">
-                            <input
-                              type="radio"
-                              name="salary"
-                              checked={filters.salaryRange === "0-5000"}
-                              onChange={() =>
-                                setFilters((prev) => ({
-                                  ...prev,
-                                  salaryRange: "0-5000",
-                                }))
-                              }
-                            />
-                            0 - 5k
-                          </label>
-
-                          <label className="flex items-center gap-2 text-sm font-medium">
-                            <input
-                              type="radio"
-                              name="salary"
-                              checked={filters.salaryRange === "5000-10000"}
-                              onChange={() =>
-                                setFilters((prev) => ({
-                                  ...prev,
-                                  salaryRange: "5000-10000",
-                                }))
-                              }
-                            />
-                            5k - 10k
-                          </label>
-
-                          <label className="flex items-center gap-2 text-sm font-medium">
-                            <input
-                              type="radio"
-                              name="salary"
-                              checked={filters.salaryRange === "10000-15000"}
-                              onChange={() =>
-                                setFilters((prev) => ({
-                                  ...prev,
-                                  salaryRange: "10000-15000",
-                                }))
-                              }
-                            />
-                            10k - 15k
-                          </label>
-
-                          <label className="flex items-center gap-2 text-sm font-medium">
-                            <input
-                              type="radio"
-                              name="salary"
-                              checked={filters.salaryRange === "15000+"}
-                              onChange={() =>
-                                setFilters((prev) => ({
-                                  ...prev,
-                                  salaryRange: "15000+",
-                                }))
-                              }
-                            />
-                            15k+
-                          </label>
-                        </div>
-                      </div>
-                      <hr className="text-gray-300" />
-                      <div className="py-5">
-                        <h5 className="text-sm font-medium mb-2">Job Type</h5>
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="checkbox"
-                              checked={filters.jobTypes.includes("Full-Time")}
-                              onChange={() => handleJobType("Full-Time")}
-                            />
-                            <p className="text-sm font-medium">Full-time</p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="checkbox"
-                              checked={filters.jobTypes.includes("Part-Time")}
-                              onChange={() => handleJobType("Part-Time")}
-                            />{" "}
-                            <p className="text-sm font-medium">Part-time</p>
-                          </div>
-                        </div>
-                      </div>
-                      <hr className="text-gray-300" />
-                      <div className="py-5">
-                        <h5 className="text-sm font-medium mb-2">Location</h5>
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="checkbox"
-                              checked={filters.locations.includes("Remote")}
-                              onChange={() => handleJobLocation("Remote")}
-                            />{" "}
-                            <p className="text-sm font-medium">Remote</p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="checkbox"
-                              checked={filters.locations.includes("Onsite")}
-                              onChange={() => handleJobLocation("Onsite")}
-                            />{" "}
-                            <p className="text-sm font-medium">On-site</p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="checkbox"
-                              checked={filters.locations.includes("Hybrid")}
-                              onChange={() => handleJobLocation("Hybrid")}
-                            />{" "}
-                            <p className="text-sm font-medium">Hybrid</p>
-                          </div>
-                        </div>
-                      </div>
-                      <button
-                        onClick={resetFilters}
-                        className="bg-purple-300 p-2 rounded-lg text-purple-800 font-medium cursor-pointer hover:scale-x-97 duration-300"
-                      >
-                        Reset
-                      </button>
-                    </div>
-                  </div>
-                </>
-              )}
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
             </div>
             <div />
             <p className="font-medium text-sm">Results: {sortedJobs.length}</p>

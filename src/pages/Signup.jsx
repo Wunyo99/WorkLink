@@ -60,7 +60,7 @@ const Signup = () => {
         <div className="max-w-xl lg:w-2/3 mx-auto mt-2 border border-gray-300 rounded-xl bg-white shadow-2xl py-5 px-5">
           <div className="mb-5">
             <p className="text-5xl text-gray-800 font-bold">Register</p>
-            <div className="w-14 h-1 bg-purple-500"></div>
+            <div className="w-14 h-1 bg-purple-800"></div>
           </div>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -69,7 +69,7 @@ const Signup = () => {
                   First Name
                 </label>
                 <input
-                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-500 rounded-lg"
+                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-800 rounded-lg"
                   type="text"
                   name="firstname"
                   placeholder="John"
@@ -81,7 +81,7 @@ const Signup = () => {
                   Last Name
                 </label>
                 <input
-                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-500 rounded-lg"
+                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-800 rounded-lg"
                   type="text"
                   name="lastname"
                   placeholder="Doe"
@@ -95,7 +95,7 @@ const Signup = () => {
                   Email
                 </label>
                 <input
-                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-500 rounded-lg"
+                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-800 rounded-lg"
                   type="email"
                   name="email"
                   placeholder="johndode@gmail.com"
@@ -107,7 +107,7 @@ const Signup = () => {
                   Phone
                 </label>
                 <input
-                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-500 rounded-lg"
+                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-800 rounded-lg"
                   type="text"
                   name="phone"
                   placeholder="XXXXXXXXXX"
@@ -117,7 +117,7 @@ const Signup = () => {
             </div>
             <div className="mt-4">
               <select
-                className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-500 rounded-lg mt-1"
+                className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-800 rounded-lg mt-1"
                 name="job"
                 required
               >
@@ -136,7 +136,7 @@ const Signup = () => {
                   Password
                 </label>
                 <input
-                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-500 rounded-lg"
+                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-800 rounded-lg"
                   type={isPasswordVisible ? "text" : "password"}
                   name="password"
                   required
@@ -163,7 +163,7 @@ const Signup = () => {
                   Confirm Password
                 </label>
                 <input
-                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-500 rounded-lg"
+                  className="py-3 px-5 w-full bg-gray-200 border-0 focus:outline-purple-800 rounded-lg"
                   type={isConfPasswordVisible ? "text" : "password"}
                   name="confirmPassword"
                   required
@@ -191,7 +191,7 @@ const Signup = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full justify-center px-10 py-2 text-white bg-purple-500 font-semibold text-lg rounded-lg mt-5  hover:scale-99 duration-300 ${isSubmitting ? "opacity-70 cursor-not-allowed" : "cursor-pointer"}`}
+              className={`w-full justify-center px-10 py-2 text-white bg-purple-800 font-semibold text-lg rounded-lg mt-5  hover:scale-99 duration-300 ${isSubmitting ? "opacity-70 cursor-not-allowed" : "cursor-pointer"}`}
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center gap-2">
@@ -221,7 +221,7 @@ const Signup = () => {
             <div className="mt-2 text-center">
               <p className="text-sm font-semibold">
                 Already have an account?{" "}
-                <span className="text-purple-500 font-semibold">
+                <span className="text-purple-800 font-semibold">
                   <a href="/login">Login</a>
                 </span>
               </p>

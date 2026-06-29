@@ -5,6 +5,7 @@ import Reviews from "../components/Reviews";
 import { toast } from "react-toastify";
 import { useJobs } from "../hooks/useJobs";
 import { motion } from "framer-motion";
+import VismeForm from "../components/VismeForm";
 import {
   LaptopMinimalCheck,
   LightbulbIcon,
@@ -230,7 +231,8 @@ const Home = () => {
       </section>
 
       <section className="section-padding">
-        <motion.div
+        <VismeForm/>
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -261,7 +263,7 @@ const Home = () => {
               </div>
             </form>
           </div>
-        </motion.div>
+        </motion.div> */}
       </section>
     </>
   );
