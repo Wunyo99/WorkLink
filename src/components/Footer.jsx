@@ -118,7 +118,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="border-t border-white flex justify-between mt-10 pt-6 text-center text-white">
+      <div className="border-t border-white flex flex-col md:flex-row items-center justify-between mt-10 pt-6 text-center text-white">
         <p> © {new Date().getFullYear()} WorkLink. All Rights Reserved</p>
         <div className="flex gap-4">
           <p>Terms</p>
