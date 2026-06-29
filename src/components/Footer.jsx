@@ -1,4 +1,5 @@
 import { MapPin, PhoneCall, Mail } from "lucide-react";
+import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router";
 const Footer = () => {
   return (
@@ -20,25 +21,25 @@ const Footer = () => {
               href="https://www.facebook.com/me/"
               className="w-10 h-10 bg-gray-200 border border-white flex items-center justify-center text-xl text-purple-900 rounded-full hover:bg-yellow-200 transition duration-500"
             >
-              F
+              <FaFacebook />
             </a>
             <a
               href="#"
               className="w-10 h-10 bg-gray-200 border border-white flex items-center justify-center text-xl text-purple-900 rounded-full hover:bg-yellow-200 transition duration-500"
             >
-              T
+              <FaTwitter />
             </a>
             <a
               href="https://www.instagram.com/mawunyo.anani/"
               className="w-10 h-10 bg-gray-200 border border-white flex items-center justify-center text-xl text-purple-900 rounded-full hover:bg-yellow-200 transition duration-500"
             >
-              I
+              <FaInstagram />
             </a>
             <a
               href="https://www.youtube.com/@MawunyoAnani-vz1bs"
               className="w-10 h-10 bg-gray-200 border border-white flex items-center justify-center text-xl text-purple-900 rounded-full hover:bg-yellow-200 transition duration-500"
             >
-              Y
+              <FaYoutube />
             </a>
           </div>
         </div>
@@ -78,7 +79,6 @@ const Footer = () => {
 
         <div>
           <ul className="text-gray-300 flex flex-col space-y-2">
-
             <Link
               className="text-base capitalize hover:text-yellow-200 transition duration-500"
               to="/"
