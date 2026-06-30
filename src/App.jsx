@@ -11,6 +11,7 @@ import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 import Spinner from "./components/Spinner";
 import ErrorPage from "./pages/ErrorPage";
+import Contact from "./pages/Contact/Contact";
 const App = () => {
   const { loading } = useContext(AuthContext);
   if (loading) {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="/jobs" element={<Jobs />} />
+          <Route path="/contact" element={<Contact />} />
           <Route
             path="/jobs/:id"
             element={
