@@ -51,7 +51,7 @@ const Header = () => {
           <div className="text-gray-800 text-2xl lg:text-3xl font-bold logo">
             <a href="/">
               {" "}
-              <span className="text-white">Work</span>-Link
+              <span className="text-white">Work</span>Link
             </a>
           </div>
 
@@ -145,7 +145,7 @@ const Header = () => {
                   key={navLink.name}
                   to={navLink.path}
                   className={linkClass}
-                  onClick={()=>setIsMenuOpen(!isMenuOpen)}
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                   {navLink.name}
                 </NavLink>
