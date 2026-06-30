@@ -110,15 +110,15 @@ const Header = () => {
             <div className="py-2 md:flex">
               <div className="flex items-center gap-4">
                 {user ? (
-                  <Link to="/profile">
+                  <Link
+                  onClick={()=>setIsMenuOpen(!isMenuOpen)}
+                  to="/profile">
                     <div className="bg-purple-800 flex items-center gap-4 pe-4 rounded-full">
                       <div className="bg-yellow-200 p-1 rounded-full">
                         <User />
                       </div>
                       <p className="text-white font-medium">
-                        {user.firstname.charAt(0)}
-                        {user.lastname.charAt(0)}
-                      </p>
+                        {user.firstname}                     </p>
                     </div>
                   </Link>
                 ) : (

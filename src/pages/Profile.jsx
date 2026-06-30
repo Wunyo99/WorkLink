@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { BadgeCheck, Phone } from "lucide-react";
+import { BadgeCheck, Phone, User } from "lucide-react";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary";
@@ -138,7 +138,7 @@ const Profile = () => {
           <span className="text-purple-800">{user.firstname}</span>{" "}
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-2  gap-7">
-          <div className="bg-white border-2 border-gray-200 rounded-2xl lg:w-[80%] p-2 flex flex-col">
+          <div className="bg-white border-2 border-gray-200 rounded-2xl lg:w-[85%] p-2 flex flex-col">
             <div className="relative">
               <div className="bg-purple-800 flex justify-center h-40 rounded-2xl">
                 <p className="font-medium text-3xl text-center mt-5 text-purple-300">
@@ -148,16 +148,14 @@ const Profile = () => {
 
               <div className="absolute top-22 left-5">
                 <div className="relative w-30 h-30">
-                  <img
-                    src={user?.photoURL || "/default-avatar.png"}
-                    className="w-full h-full rounded-full border-4 border-white object-cover"
-                  />
-
+                  <div className="w-full h-full rounded-full border-4 flex items-center justify-center border-white bg-white">
+                    {user.photoURL ? <img className="w-full h-full rounded-full object-cover" src={user?.photoURL} /> : <User className="bg-purple-800 p-2 rounded-full" size={55} />}
+                  </div>
                   <button
                     onClick={() => fileRef.current.click()}
                     className="absolute bottom-1 right-1 bg-white p-2 rounded-full shadow-md hover:scale-105 transition"
                   >
-                    <Pencil size={16} className="text-purple-800" />
+                    <Pencil size={16} className="text-purple-800 cursor-pointer" />
                   </button>
                 </div>
 
@@ -198,7 +196,7 @@ const Profile = () => {
                 {isEditing ? (
                   ""
                 ) : (
-                  <BadgeCheck size={15} className="text-green-600" />
+                  <BadgeCheck size={18} className="text-green-600" />
                 )}
               </div>
 
@@ -214,11 +212,11 @@ const Profile = () => {
                     placeholder="Write your bio..."
                   />
                 ) : (
-                  <p>{user.bio || "No bio added yet."}</p>
+                  <p className="text-gray-500">{user.bio || "No bio added yet."}</p>
                 )}
               </div>
 
-              <div className="mt-5 flex items-center gap-4">
+              <div className="mt-5 flex flex-wrap md:flex-row items-center gap-4">
                 {isEditing ? (
                   <input
                     name="firstname"
@@ -228,13 +226,13 @@ const Profile = () => {
                     placeholder="phone"
                   />
                 ) : (
-                  <div className="border-2 border-gray-800 rounded-full p-2 flex items-center gap-2">
+                  <div className="rounded-full p-2 flex items-center gap-2">
                     <Phone className="text-purple-800" size={25} />
                     <p>{user.phone}</p>
                   </div>
                 )}
 
-                <div className="border-2 border-gray-800 rounded-full p-2 flex items-center gap-2">
+                <div className="rounded-full p-2 flex items-center gap-2">
                   <MdEmail className="text-purple-800" size={25} />
                   <p>{user.email}</p>
                 </div>
