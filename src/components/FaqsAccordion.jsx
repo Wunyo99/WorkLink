@@ -47,12 +47,12 @@ const FaqsAccordion = () => {
         {faqs.map((faq, id) => (
           <div
             key={faq.id}
-            className={` flex flex-col border-2 sm:w-full lg:w-180 mx-auto rounded-lg p-5 ${activeAccordionIndex === id ? "border-purple-800 " : "border-gray-200"}`}
+            className={` flex flex-col border-2 w-full lg:w-180 mx-auto rounded-lg p-5 ${activeAccordionIndex === id ? "border-purple-800 " : "border-gray-200"}`}
           >
             <div className="flex justify-between gap-6">
               <p className="font-semibold text-xl">{faq.question}</p>
               <button
-                className="text-purpl-800 w-8 h-8 flex items-center justify-center bg-red-100 rounded-full cursor-pointer"
+                className="text-purpl-800 w-8 h-8 p-2 flex items-center justify-center bg-red-100 rounded-full cursor-pointer"
                 onClick={() => toggleAccordion(id)}
               >
                 {activeAccordionIndex === id ? (

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BadgeCheck, Phone, User } from "lucide-react";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -14,6 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchJobs } from "../utils/allJobs_http";
 import JobCard from "../components/JobCard";
 import Spinner from "../components/Spinner";
+import { getLogoUrl } from "../utils/getLogo";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -33,6 +34,8 @@ const Profile = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const appliedJobs = user?.appliedJobs || [];
 
   const handleSave = async () => {
     if (!user) return;
@@ -149,13 +152,26 @@ const Profile = () => {
               <div className="absolute top-22 left-5">
                 <div className="relative w-30 h-30">
                   <div className="w-full h-full rounded-full border-4 flex items-center justify-center border-white bg-white">
-                    {user.photoURL ? <img className="w-full h-full rounded-full object-cover" src={user?.photoURL} /> : <User className="bg-purple-800 p-2 rounded-full" size={55} />}
+                    {user.photoURL ? (
+                      <img
+                        className="w-full h-full rounded-full object-cover"
+                        src={user?.photoURL}
+                      />
+                    ) : (
+                      <User
+                        className="bg-purple-800 p-2 rounded-full"
+                        size={55}
+                      />
+                    )}
                   </div>
                   <button
                     onClick={() => fileRef.current.click()}
                     className="absolute bottom-1 right-1 bg-white p-2 rounded-full shadow-md hover:scale-105 transition"
                   >
-                    <Pencil size={16} className="text-purple-800 cursor-pointer" />
+                    <Pencil
+                      size={16}
+                      className="text-purple-800 cursor-pointer"
+                    />
                   </button>
                 </div>
 
@@ -212,7 +228,9 @@ const Profile = () => {
                     placeholder="Write your bio..."
                   />
                 ) : (
-                  <p className="text-gray-500">{user.bio || "No bio added yet."}</p>
+                  <p className="text-gray-500">
+                    {user.bio || "No bio added yet."}
+                  </p>
                 )}
               </div>
 
@@ -279,39 +297,103 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="flex flex-col">
+          <div className=" ">
             <div className="mb-2">
               <div className="flex items-center gap-4">
                 {" "}
-                <h1 className="text-3xl font-medium">Your Saved Jobs</h1>
+                <h1 className="text-2xl md:text-3xl font-medium">
+                  Applied Jobs
+                </h1>
                 <div className="w-5 h-5 flex items-center justify-center text-center bg-purple-200 rounded-full">
                   <p className=" text-purple-800 font-medium">
-                    {savedJobs.length}
+                    {appliedJobs.length}
                   </p>
                 </div>
               </div>
-              <div className="h-1 w-15 bg-purple-800" />
+              <div className="h-1 w-10 bg-purple-800" />
             </div>
-            <div>
-              {isLoading ? (
-                <Spinner />
-              ) : savedJobs.length > 0 ? (
-                <div className="border-2 border-gray-200 flex flex-col gap-4 p-5 rounded-2xl overflow-y-scroll h-80">
-                  <JobCard jobs={savedJobs} />
-                </div>
-              ) : (
-                <p className="text-center text-gray-500">
-                  You haven't saved any jobs yet.
-                </p>
-              )}
-            </div>
-            <button
-              onClick={logoutNavigateSignIn}
-              className="bg-red-200 text-red-600 font-medium px-4 py-3 rounded-lg mt-7 w-80 mx-auto cursor-pointer hover:scale-98 duration-200"
-            >
-              Logout
-            </button>
+            {appliedJobs.length === 0 ? (
+              <p className="text-gray-500 mt-2">No applications yet.</p>
+            ) : (
+              <div className="border-2 border-gray-200 flex flex-col gap-4 p-5 rounded-2xl overflow-y-scroll h-80">
+                {appliedJobs.map((app) => (
+                  <Link to={`/jobs/${app.jobId}`}>
+                    <div
+                      key={app.jobId}
+                      className="border-2 border-gray-200 relative p-2 rounded-lg flex justify-between items-center hover:shadow-xl hover:border-purple-800 duration-300"
+                    >
+                      <div className="">
+                        <div className="flex gap-6 items-center">
+                          <div className="">
+                            <img
+                              src={getLogoUrl(`${app.company}.com`)}
+                              className="w-15 h-15 rounded-lg"
+                            />{" "}
+                          </div>
+
+                          <div>
+                            <h5 className="font-medium text-xl">
+                              {app.jobTitle}
+                            </h5>
+                            <div className="flex items-center gap-2 text-gray-500">
+                              <p className="capitalize text-sm font-medium">
+                                {app.company}
+                              </p>
+                              •
+                              <p className="font-medium text-sm">
+                                {app.location}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="absolute top-0 inset-e-0 bg-green-200 py-1 px-2 rounded-tr-md">
+                          <p className="text-sm text-green-500 font-medium">
+                            {app.status}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
+        </div>
+
+        <div className="flex flex-col py-10">
+          <div className="mb-2">
+            <div className="flex items-center gap-4">
+              {" "}
+              <h1 className="text-2xl md:text-3xl font-medium">
+                Your Saved Jobs
+              </h1>
+              <div className="w-5 h-5 flex items-center justify-center text-center bg-purple-200 rounded-full">
+                <p className=" text-purple-800 font-medium">
+                  {savedJobs.length}
+                </p>
+              </div>
+            </div>
+            <div className="h-1 w-15 bg-purple-800" />
+          </div>
+          <div>
+            {isLoading ? (
+              <Spinner />
+            ) : savedJobs.length > 0 ? (
+              <div className="border- border-gray-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-5 rounded-2xl">
+                <JobCard jobs={savedJobs} />
+              </div>
+            ) : (
+              <p className="text-cente mt-4 text-gray-500">
+                You haven't saved any jobs yet.
+              </p>
+            )}
+          </div>
+          <button
+            onClick={logoutNavigateSignIn}
+            className="bg-red-200 text-red-600 font-medium px-4 py-3 rounded-lg mt-7 w-80 mx-auto cursor-pointer hover:scale-98 duration-200"
+          >
+            Logout
+          </button>
         </div>
       </section>
     </>

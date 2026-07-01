@@ -1,26 +1,73 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { db } from "../firebase/firebase";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  Timestamp,
+} from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const ApplyForm = ({ job, onSuccess }) => {
   const [isApplying, setIsApplying] = useState(false);
+
+  const { user } = useContext(AuthContext);
+
   console.log("Job:", job);
+
   const handleApply = async (e) => {
     e.preventDefault();
     setIsApplying(true);
-    const formData = new FormData(e.target);
-    const application = {
-      ...Object.fromEntries(formData.entries()),
-      job: job.id,
-    };
 
-    // const { fullname, email, phone, cv, addInfo } = application;
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      const userData = userSnap.data();
+      const appliedJobs = userData.appliedJobs || [];
 
-    console.log(application);
+      const alreadyApplied = appliedJobs.some(
+        (application) => application.jobId === job.id,
+      );
 
-    setTimeout(() => {
+      if (alreadyApplied) {
+        toast.info("You have already applied for this job.");
+        setIsApplying(false);
+        return;
+      }
+      await updateDoc(userRef, {
+        appliedJobs: arrayUnion({
+          jobId: job.id,
+          jobTitle: job.title,
+          company: job.companyId,
+          location: job.location,
+          appliedAt: Timestamp.now(),
+          status: "Applied",
+        }),
+      });
+      const formData = new FormData(e.target);
+      const application = {
+        ...Object.fromEntries(formData.entries()),
+        job: job.id,
+      };
+
+      console.log(application);
+
       setIsApplying(false);
       onSuccess?.();
-      e.target.reset();
-    }, 2000);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong");
+    } finally {
+      setIsApplying(false);
+    }
+
+    // setTimeout(() => {
+    //   setIsApplying(false);
+    //   onSuccess?.();
+    //   e.target.reset();
+    // }, 2000);
   };
   return (
     <>
