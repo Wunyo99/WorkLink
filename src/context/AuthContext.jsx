@@ -68,7 +68,6 @@ const AuthProvider = ({ children }) => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      toast.success("Logged Out");
     } catch (error) {
       toast.error("Logout Failed");
     }

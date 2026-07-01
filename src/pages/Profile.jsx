@@ -120,8 +120,9 @@ const Profile = () => {
     await handleUpload(file);
   };
 
-  const logoutNavigateSignIn = async () => {
-    await handleLogout();
+  const logoutNavigateSignIn = () => {
+    handleLogout();
+    toast.success("Logged Out");
     navigate("/login");
   };
 
