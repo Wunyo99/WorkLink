@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Eye, EyeClosed } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 const Login = () => {
   const [isPasswordVisible, setIsPasswordVissible] = useState(false);
@@ -89,7 +89,6 @@ const Login = () => {
               type="submit"
               disabled={isLoggingIn}
               className={`w-full justify-center px-10 py-2 text-white bg-purple-800 font-semibold text-lg rounded-lg mt-5  hover:scale-99 duration-300 ${isLoggingIn ? "opacity-70 cursor-not-allowed" : "cursor-pointer"}`}
-
             >
               {isLoggingIn ? (
                 <span className="flex items-center justify-center gap-2">
@@ -120,7 +119,7 @@ const Login = () => {
               <p className="text-sm font-semibold">
                 Don't have an account?{" "}
                 <span className="text-purple-800 font-semibold">
-                  <a href="/register">Register</a>
+                  <Link to="/register">Register</Link>
                 </span>
               </p>
             </div>

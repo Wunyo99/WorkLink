@@ -3,7 +3,7 @@ import { Eye, EyeClosed } from "lucide-react";
 import { jobs } from "../data/jobs";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
   const [isPasswordVisible, setIsPasswordVissible] = useState(false);
@@ -222,7 +222,7 @@ const Signup = () => {
               <p className="text-sm font-semibold">
                 Already have an account?{" "}
                 <span className="text-purple-800 font-semibold">
-                  <a href="/login">Login</a>
+                  <Link to="/login">Login</Link>
                 </span>
               </p>
             </div>
