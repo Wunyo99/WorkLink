@@ -49,28 +49,24 @@ const Footer = () => {
             <Link
               className="text-base capitalize hover:text-yellow-200 transition duration-500"
               to="/"
-              href="/home"
             >
               home
             </Link>
             <Link
               className="text-base capitalize hover:text-yellow-200 transition duration-500"
-              to="/"
-              href="/admissions"
+              to="/jobs"
             >
               Find Jobs
             </Link>
             <Link
               className="text-base capitalize hover:text-yellow-200 transition duration-500"
               to="/"
-              href="/facilities"
             >
               Partners
             </Link>
             <Link
               className="text-base capitalize hover:text-yellow-200 transition duration-500"
               to="/"
-              href="/staff"
             >
               Blog
             </Link>
@@ -87,7 +83,7 @@ const Footer = () => {
             </Link>
             <Link
               className="text-base capitalize hover:text-yellow-200 transition duration-500"
-              to="/"
+              to="/contact"
             >
               Contact Us
             </Link>
