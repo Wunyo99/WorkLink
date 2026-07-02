@@ -97,12 +97,12 @@ const JobCard = ({ jobs, limit }) => {
             <p>{job.description}</p>
           </div>
           <div className="flex items-center gap-4">
-            <a
-              href={`/jobs/${job.id}`}
+            <Link
+              to={`/jobs/${job.id}`}
               className="bg-gray-800 text-white py-2 px-4 font-medium rounded-lg hover:scale-95 duration-300"
             >
               View Details
-            </a>
+            </Link>
             <button
               onClick={() => handleApply(job)}
               className="bg-purple-200 text-purple-800 font-medium py-2 px-4 rounded-lg cursor-pointer hover:scale-95 duration-300"
