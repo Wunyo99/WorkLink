@@ -84,7 +84,9 @@ const Login = () => {
                 )}
               </button>
             </div>
-
+            <div>
+              <Link to="/resetpassword" className="text-sm font-medium text-purple-800">Forgot Password?</Link>
+            </div>
             <button
               type="submit"
               disabled={isLoggingIn}

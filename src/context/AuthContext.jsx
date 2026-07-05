@@ -4,11 +4,11 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { toast } from "react-toastify";
 import { auth, db } from "../firebase/firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
-
 export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -73,6 +73,10 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const handlePasswordReset = async (email) => {
+    return await sendPasswordResetEmail(auth, email);
+  };
+
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
@@ -83,7 +87,7 @@ const AuthProvider = ({ children }) => {
           setUser({
             ...currentUser,
             ...docSnap.data(),
-            savedJobs: docSnap.data()?.savedJobs || []
+            savedJobs: docSnap.data()?.savedJobs || [],
           });
         } else {
           setUser(currentUser);
@@ -103,6 +107,7 @@ const AuthProvider = ({ children }) => {
     handleLogin,
     handleSignUp,
     handleLogout,
+    handlePasswordReset,
   };
 
   return (

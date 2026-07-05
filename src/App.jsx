@@ -3,6 +3,7 @@ import MainLayout from "./layout/MainLayout";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
 import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
 import ProtectedRoutes from "./components/Auth/ProtectedRoutes";
@@ -36,6 +37,7 @@ const App = () => {
         </Route>
         <Route path="/register" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/resetpassword" element={<ForgotPassword />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
