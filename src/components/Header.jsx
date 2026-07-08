@@ -69,7 +69,7 @@ const Header = () => {
           <div className="hidden md:flex">
             {user ? (
               <Link to="/profile">
-                <div className="bg-purple-800 flex items-center gap-4 pe-4 rounded-full">
+                <div className="bg-purple-800 flex items-center gap-4 p-1 pe-4 rounded-full">
                   <div className="bg-yellow-200 p-1 rounded-full">
                     <User />
                   </div>
@@ -113,7 +113,7 @@ const Header = () => {
                   <Link
                   onClick={()=>setIsMenuOpen(!isMenuOpen)}
                   to="/profile">
-                    <div className="bg-purple-800 flex items-center gap-4 pe-4 rounded-full">
+                    <div className="bg-purple-800 flex items-center p-1 gap-4 pe-4 rounded-full">
                       <div className="bg-yellow-200 p-1 rounded-full">
                         <User />
                       </div>

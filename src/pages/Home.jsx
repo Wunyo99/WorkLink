@@ -130,10 +130,12 @@ const Home = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.2 }}
               key={step.h1}
-              className="border-2 rounded-lg border-gray-800 shadow w-80 mx-auto p-5 hover:scale-102 hover:shadow-xl duration-300"
+              className="border-2 rounded-lg border-gray-300 shadow w-80 mx-auto p-5 hover:border-purple-800"
             >
               <div className="w-14 h-14 flex items-center justify-center border-2 border-purple-300 text-purple-800 rounded-full">
                 {step.icon}
@@ -231,7 +233,7 @@ const Home = () => {
       </section>
 
       <section className="section-padding">
-        <VismeForm/>
+        <VismeForm />
         {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

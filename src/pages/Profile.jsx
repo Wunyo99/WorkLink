@@ -152,7 +152,7 @@ const Profile = () => {
 
               <div className="absolute top-22 left-5">
                 <div className="relative w-30 h-30">
-                  <div className="w-full h-full rounded-full border-4 flex items-center justify-center border-white bg-white">
+                  <div className="w-full h-full rounded-full border-2 flex items-center justify-center border-purple-300 bg-white">
                     {user.photoURL ? (
                       <img
                         className="w-full h-full rounded-full object-cover"
@@ -160,7 +160,7 @@ const Profile = () => {
                       />
                     ) : (
                       <User
-                        className="bg-purple-800 p-2 rounded-full"
+                        className="bg-purple-800 text-purple-300 p-2 rounded-full"
                         size={55}
                       />
                     )}
